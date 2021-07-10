@@ -1,3 +1,8 @@
+/* https://tailwindcss.com/docs/guides/create-react-app#include-tailwind-in-your-css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
