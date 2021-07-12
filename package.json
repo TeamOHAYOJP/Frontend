@@ -53,6 +53,8 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/js-cookie": "^2.2.7",
+    "@types/react-router-dom": "^5.1.8",
     "autoprefixer": "9",
     "postcss": "7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
