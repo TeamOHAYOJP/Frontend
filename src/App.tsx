@@ -1,13 +1,13 @@
 import React, { VFC } from "react";
-import Button from "components/Button";
 import './App.css';
+import SignUp from './pages/SignUp';
 
 const App: VFC = () => {
   return (
-    <div className="App">
-      <Ranking />
+    <div className="Button">
+      <SignUp />
     </div>
-  );
+  )
 }
 
 export default App;

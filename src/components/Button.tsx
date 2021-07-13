@@ -1,16 +1,18 @@
 import React, { VFC } from 'react';
 
 interface PROPS {
-  name: string;
-  age: number;
-  id: number;
+  bgClor: string;
+  txClor: string;
+  btnName: string;
+  height: number;
 }
 
 const Button = (props: PROPS) => {
-  const { name, age, id } = props
   return (
-    <div className="bg-${bgColor}-500">
-
+    <div className="text-center my-2">
+      {/* ボタンcomponentsの作成、装飾はtailwind-css */}
+      <button className={`w-9/12 h-${props.height} text-base text-center bg-${props.bgClor}-500 text-${props.txClor}`
+        }>{ props.btnName }</button>
     </div>
   )
 }
