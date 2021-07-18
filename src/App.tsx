@@ -1,5 +1,4 @@
 
-import './App.css';
 import { VFC } from 'react';
 
 import { HeaderDefault }  from 'layouts/Header'
