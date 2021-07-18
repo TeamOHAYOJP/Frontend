@@ -67,12 +67,5 @@ export const HeaderUserPeofile: FC = (userId)=> {
 }
 
 
-/**
- * welcomPage => none
- * SignUp => onlyLeft
- * SignIn => onlyLeft
- * 
- *  
-*/
 
 
