@@ -5,7 +5,7 @@ import Header from 'layouts/Header'
 
 const App: VFC = () => {
   return (
-    <div className="conteiner">
+    <div className="h-screen conteiner bg-gray-250">
       <div>
         <Header/>
 
