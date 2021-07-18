@@ -1,14 +1,12 @@
-import { useState, useEffect, VFC } from 'react';
-import { execTest } from "lib/api/test"
+import { VFC } from 'react';
 
-import Header from 'layouts/Header'
+import { HeaderDefault }  from 'layouts/Header'
 
 const App: VFC = () => {
   return (
     <div className="h-screen conteiner bg-gray-250">
       <div>
-        <Header/>
-
+        <HeaderDefault/>
       </div>
     </div>
   )
