@@ -1,25 +1,15 @@
 import { useState, useEffect, VFC } from 'react';
 import { execTest } from "lib/api/test"
 
-import './App.css';
+import Header from 'layouts/Header'
+import Footer from 'layouts/Footer'
 
 const App: VFC = () => {
-  const [message, setMessage] = useState<string>("")
-
-  const handleExecTest = async () => {
-    const res = await execTest()
-
-    if (res.status === 200) {
-      setMessage(res.data.message)
-    }
-  }
-
-  useEffect(() => {
-    handleExecTest()
-  }, [])
-
   return (
-    <h1>{message}</h1>
+    <div>
+      <Header/>
+      <Footer/>
+    </div>
   )
 }
 
