@@ -4,7 +4,7 @@ interface PROPS {
     bgColor?  : string;
     textColor?: string;
     innerText?: string;
-    height?   : number;
+    type?     : "button" | "submit" | "reset" | undefined
 }
 
 const Button = (props: PROPS) => {
@@ -21,7 +21,7 @@ const Button = (props: PROPS) => {
                 focus:outline-none 
                 focus:shadow-outline
             `} 
-            type="button"
+            type={props.type || "button"}
         >
             {props.innerText || ""}
         </button>
