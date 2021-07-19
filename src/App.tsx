@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from "react"
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-
+// import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+    
 import AppLayout from "layouts/AppLayout"
 // import Home from "pages/Home"
 import SignUp from "pages/SignUp"
@@ -49,7 +50,7 @@ const App: React.FC = () => {
         } catch (err) {
 
             console.log(err)
-            
+
         }
 
         setLoading(false)
