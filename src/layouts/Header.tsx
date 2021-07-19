@@ -129,61 +129,42 @@ export const Header: React.FC = () => {
 export const HeaderDefault: FC = () => {
 
     
-
-    // const userSignedIn: Boolean = ...
+    const { isSignedIn, currentUser } = useContext(AuthContext)
     // const doesUserWokeUp:Boolean = ...
 
     return (
-        <div className="bg-gradient-to-r from-red-500 flex justify-between p-2">
+        <div className="bg-blue flex justify-between p-2 shadow-lg">
             <div>
-                <LeftIcon />
+                <Link to="/">
+                    <LeftIcon />
+                </Link>
             </div>
             <div className="flex">
                 <div className="mr-5">
-                    {/* userSignedIn? && doesUserWokeUp? ? <TwitterIcon color="#000" /> : "" ;*/}
-                    <TwitterIcon color="#000" />
+                    {
+                        isSignedIn && currentUser /* && doesUserWokeUp?*/ ? (
+
+                            <Link to="/">
+                                <TwitterIcon color="#000" /> 
+                            </Link>
+                            
+                        ): ("") 
+                    }
                 </div>
                 <div >
-                    {/* userSignedIn? ? <HomeIcon color="#000" /> : "" ;*/}
-                    <HomeIcon color="#000" />
+                    {
+                        isSignedIn && currentUser  ? (
+
+                            <Link to="/">
+                                <HomeIcon color="#000" /> 
+                            </Link>
+
+                        ):("")
+                    }
                 </div>
             </div>
         </div>
     )
-}
-
-export const HeaderUserPeofile: FC = (userId) => {
-
-    // const userSignedIn: Boolean = ...
-    // const isCurrentUser : Boolean = userId === currentUser.id
-
-    // if(userSignedIn){
-
-    //     return <HeaderDefault/>
-
-    // }
-    // else {
-
-    return (
-        <div className="bg-gradient-to-r from-red-500 flex justify-between p-2">
-            <div>
-                <LeftIcon />
-            </div>
-            <div className="flex">
-                <div className="mr-5">
-                    {/*  doesUserWokeUp? ? <TwitterIcon color="#000" /> : "" ;*/}
-                    <TwitterIcon color="#000" />
-                </div>
-                <div >
-                    {/* userSignedIn? ? <HomeIcon color="#000" /> : "" ;*/}
-                    <EditIcon color="#000" />
-                </div>
-            </div>
-        </div>
-    )
-
-    // }
-
 }
 
 

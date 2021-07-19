@@ -3,7 +3,7 @@ import React from "react"
 import { Container, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import { Header } from "layouts/Header"
+import { Header, HeaderDefault } from "layouts/Header"
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -20,9 +20,9 @@ const AppLayout = ({ children }: CommonLayoutProps) => {
     const classes = useStyles()
 
     return (
-        <>
+        <div className="min-h-screen bg-white">
             <header>
-                <Header />
+                <HeaderDefault />
             </header>
             <main>
                 <Container maxWidth="lg" className={classes.container}>
@@ -33,7 +33,8 @@ const AppLayout = ({ children }: CommonLayoutProps) => {
                     </Grid>
                 </Container>
             </main>
-        </>
+
+        </div>
     )
 }
 
