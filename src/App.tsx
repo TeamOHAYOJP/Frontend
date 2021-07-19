@@ -9,6 +9,8 @@ import SignIn from "pages/SignIn"
 import { Welcome } from "pages/Welcome"
 import { getCurrentUser } from "lib/api/auth"
 import { User } from "interfaces/index"
+import { UserPrifile } from "pages/UserProfile"
+
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext({} as {
@@ -84,6 +86,8 @@ const App: React.FC = () => {
                         <Route exact path="/" component={Welcome} />
                         <Route exact path="/signup" component={SignUp} />
                         <Route exact path="/signin" component={SignIn} />
+                        <Route exact path="/users/:id" component={UserPrifile} />
+                        
                         <Private>
                             <Switch>
                             <Route exact path="/users" component={Welcome} />
