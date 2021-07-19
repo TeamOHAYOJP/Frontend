@@ -30,17 +30,13 @@ export const Ranking: VFC = ()=>{
 
     return (
         <>
-        {
-
-        }
-        {
-            rankings.map(r => (
-                <li key={r.id}>
-                    <p>{r + ""}</p>
+        <div className="">
+            {
+                rankings.map(r => (
                     <RankingRecord {...r}/>
-                </li>
-            ))
-        }
+                ))
+            }
+        </div>
         </>
     )
 }

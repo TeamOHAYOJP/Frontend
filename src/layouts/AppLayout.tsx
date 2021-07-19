@@ -26,7 +26,7 @@ const AppLayout = ({ children }: CommonLayoutProps) => {
             </header>
             <main>
                 <Container maxWidth="lg" className={classes.container}>
-                    <Grid container justifyContent="center">
+                    <Grid  justifyContent="center">
                         <Grid item>
                             {children}
                         </Grid>
