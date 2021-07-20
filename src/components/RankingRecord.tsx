@@ -13,7 +13,6 @@ import PersonIcon from "@material-ui/icons/Person"
 
 
 
-
 export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
 
     const [user, setUser] = useState<User>()
@@ -40,7 +39,8 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
     }, [])
 
     const rankingDate = new Date(ranking.createdAt)
-
+    // TODO: recodeにリンクをつけてuserのページに飛べるようにしないといけない
+    
     return(
         <>
             <div className="max-w-md w-full lg:max-w-full m-auto mb-3 ">

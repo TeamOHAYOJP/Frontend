@@ -96,6 +96,11 @@ export const HeaderDefault: FC = () => {
                         </Typography>
                         <div>
                             {
+                                // TODO: twitterのやつやんないと
+                                // 1. backでrankig関連全部作る
+                                // 2. backでuserが含まれてるかをjsonで /rankigs_controller#isUserInclueded & もしくは面倒だったらフロント側でやってもいい
+                                // 3. フロントで条件分岐↓コメントイン
+                                // 4. あの記事通りにやってみる.
                                 isSignedIn && currentUser  /*&&  doesUserWokeUp */ ? (
                                     <>
                                         <Button aria-controls="" aria-haspopup="true">

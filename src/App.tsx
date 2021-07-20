@@ -76,6 +76,9 @@ const App: React.FC = () => {
         }
     }
 
+    // TODO: routesブランチでフロー通りに
+    // TODO: back whenever
+    // TODO: back日本時間
     return (
         <Router>
             <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
