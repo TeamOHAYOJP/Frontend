@@ -7,6 +7,7 @@ module.exports = {
       blue: '#B5EAEA',
       pink: '#FFBCBC',
       red: '#F38BA0',
+      green: '#1EAE98'
     }
   },
   variants: {

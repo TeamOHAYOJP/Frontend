@@ -5,6 +5,9 @@ import { getRankings } from "lib/api/ranking";
 import { DailyRanking } from "interfaces/ranking";
 
 import { RankingRecord } from "components/RankingRecord";
+
+
+
 export const Ranking: VFC = ()=>{
 
     const [ rankings, setRankings ] = useState<DailyRanking[]>([])
