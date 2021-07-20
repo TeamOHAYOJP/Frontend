@@ -3,16 +3,12 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 // import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom"
     
 import AppLayout from "layouts/AppLayout"
-// import Home from "pages/Home"
-import SignUp from "pages/SignUp"
-import SignIn from "pages/SignIn"
-import { Ranking } from "pages/Ranking"
-import { Welcome } from "pages/Welcome"
+
+
 import { getCurrentUser } from "lib/api/auth"
 import { User } from "interfaces/index"
-import { UserPrifile } from "pages/UserProfile"
-import { UserEdit } from "pages/UserEdit"
 
+import { Routes } from 'Routes'
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext({} as {
@@ -73,7 +69,7 @@ const App: React.FC = () => {
             if (isSignedIn) {
                 return children
             } else {
-                return <Redirect to="/welcome" />
+                return <Redirect to={Routes.welcome.path} />
             }
         } else {
             return <></>
@@ -85,16 +81,15 @@ const App: React.FC = () => {
             <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
                 <AppLayout>
                     <Switch>
-                        <Route exact path="/" component={Ranking} />
-                        <Route exact path="/welcome" component={Welcome} />
-                        <Route exact path="/signup" component={SignUp} />
-                        <Route exact path="/signin" component={SignIn} />
-                        <Route exact path="/users/:id" component={UserPrifile} />
-                        <Route exact path="/users/mypage/edit" component={UserEdit} />
+                        <Route {...Routes.root} />
+                        <Route {...Routes.welcome} />
+                        <Route {...Routes.signUp}/>
+                        <Route {...Routes.signIn} />
+                        <Route {...Routes.userProfile} />
+                        <Route {...Routes.userEdit} />
 
                         <Private>
                             <Switch>
-                            <Route exact path="/users" component={Welcome} />
                             </Switch>
                         </Private>
                     </Switch>
