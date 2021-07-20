@@ -6,6 +6,8 @@ import { User } from 'interfaces/index'
 import { getUser } from "lib/api/user";
 import { getCurrentUser } from "lib/api/auth";
 
+import PersonIcon from "@material-ui/icons/Person"
+
 
 export const UserPrifile:VFC = () =>{
 
@@ -38,9 +40,12 @@ export const UserPrifile:VFC = () =>{
         {
             user ?  (
                 <>
-                    <h1>{user.id}</h1>
-                    <h1>{user.name}</h1>
-                    <h1>{user.email}</h1>
+                    <div className="bg-red rounded-full h-24 w-24 flex justify-center items-start m-auto p-1 shadow-2xl" >
+                        <div className="bg-white rounded-full w-full h-full flex justify-center items-center">
+                            <PersonIcon fontSize="large"/>
+                        </div>
+                    </div>
+                    <p className="text-center font-mono">{user.name}</p>
                 </>
             ):(
                 <>
