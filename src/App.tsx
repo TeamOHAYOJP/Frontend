@@ -10,6 +10,7 @@ import { Welcome } from "pages/Welcome"
 import { getCurrentUser } from "lib/api/auth"
 import { User } from "interfaces/index"
 import { UserPrifile } from "pages/UserProfile"
+import { UserEdit } from "pages/UserEdit"
 
 
 // グローバルで扱う変数・関数
@@ -83,11 +84,13 @@ const App: React.FC = () => {
             <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
                 <AppLayout>
                     <Switch>
+                        
                         <Route exact path="/" component={Welcome} />
                         <Route exact path="/signup" component={SignUp} />
                         <Route exact path="/signin" component={SignIn} />
                         <Route exact path="/users/:id" component={UserPrifile} />
-                        
+                        <Route exact path="/users/mypage/edit" component={UserEdit} />
+
                         <Private>
                             <Switch>
                             <Route exact path="/users" component={Welcome} />
