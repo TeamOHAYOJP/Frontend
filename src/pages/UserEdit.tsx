@@ -1,26 +1,26 @@
 import React, { VFC } from "react";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
 
 import { User } from 'interfaces/index'
-import { getUser } from "lib/api/user";
 import { getCurrentUser } from "lib/api/auth";
 
 import PersonIcon from "@material-ui/icons/Person"
+import TextField from "@material-ui/core/TextField"
+import { Link } from "react-router-dom";
 
 
-export const UserPrifile:VFC = () =>{
+export const UserEdit:VFC = () =>{
 
-    const { id }:any = useParams()
     const [ user, setUser ] = useState<User>()
+    const [name, setName] = useState<string>("")
 
     const handleSetUser = async () =>{
         try{
             
-            const res = id === "mypage" ? await getCurrentUser() : await getUser(id) ;
+            const res = await getCurrentUser() 
 
             if(res?.status === 200){
-                setUser(res.data.user || res.data.currentUser)
+                setUser(res.data.currentUser)
             }else{
                 console.log("取得に失敗しました")
             }
@@ -45,12 +45,17 @@ export const UserPrifile:VFC = () =>{
                             <PersonIcon fontSize="large"/>
                         </div>
                     </div>
-                    <p className="text-center font-mono">{user.name}</p>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        label="名前"
+                        defaultValue={user.name}
+                        margin="dense"
+                        onChange={event => setName(event.target.value)}
+                    />
                 </>
             ):(
-                <>
-                    <h1>ユーザが見つかりませんでした</h1>
-                </>
+                <Link to="/signin" ></Link>
             )
         }
         </>
