@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react"
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 // import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-    
+
 import AppLayout from "layouts/AppLayout"
 
 
@@ -9,6 +9,7 @@ import { getCurrentUser } from "lib/api/auth"
 import { User } from "interfaces/index"
 
 import { Routes } from 'Routes'
+import Cookies from "js-cookie"
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext({} as {
@@ -25,7 +26,6 @@ export const AuthContext = createContext({} as {
 })
 
 const App: React.FC = () => {
-
 
     const [loading, setLoading]         = useState<boolean>(true)
     const [isSignedIn, setIsSignedIn]   = useState<boolean>(false)
