@@ -20,13 +20,13 @@ const AppLayout = ({ children }: CommonLayoutProps) => {
     const classes = useStyles()
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white font-mono">
             <header>
                 <HeaderDefault />
             </header>
             <main>
                 <Container maxWidth="lg" className={classes.container}>
-                    <Grid container justifyContent="center">
+                    <Grid  justifyContent="center">
                         <Grid item>
                             {children}
                         </Grid>
