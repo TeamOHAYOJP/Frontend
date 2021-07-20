@@ -5,9 +5,14 @@ import { User } from 'interfaces/index'
 import { getCurrentUser } from "lib/api/auth";
 
 import PersonIcon from "@material-ui/icons/Person"
+import DoneIcon from '@material-ui/icons/Done';
+
 import TextField from "@material-ui/core/TextField"
 import { Link } from "react-router-dom";
+import { Button } from '@material-ui/core'
 
+
+import { Routes } from "Routes";
 
 export const UserEdit:VFC = () =>{
 
@@ -53,9 +58,14 @@ export const UserEdit:VFC = () =>{
                         margin="dense"
                         onChange={event => setName(event.target.value)}
                     />
+                    <div className="flex justify-end">
+                        <Button variant="outlined" >
+                                update<DoneIcon className="text-green"/>
+                        </Button>
+                    </div>
                 </>
             ):(
-                <Link to="/signin" ></Link>
+                <Link to={Routes.welcome.path} ></Link>
             )
         }
         </>
