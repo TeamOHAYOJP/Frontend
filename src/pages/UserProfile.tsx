@@ -1,12 +1,16 @@
 import React, { useContext, VFC } from "react";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { User } from 'interfaces/index'
 import { getUser } from "lib/api/user";
 import { AuthContext } from "App";
 
 import PersonIcon from "@material-ui/icons/Person"
+import EditIcon from '@material-ui/icons/Edit';
+import { Button } from "@material-ui/core";
+
+import { Routes } from "Routes";
 
 
 export const UserPrifile:VFC = () =>{
@@ -49,7 +53,14 @@ export const UserPrifile:VFC = () =>{
                             <PersonIcon fontSize="large"/>
                         </div>
                     </div>
-                    <p className="text-center font-mono">{user.name}</p>
+                    <div className="my-4">
+                        <p className="text-center font-mono">{user.name}</p>
+                    </div>
+                    <Button variant="outlined">
+                        <Link to={Routes.userEdit.path}>
+                            Edit<EditIcon/>
+                        </Link>
+                    </Button>
                 </>
             ):(
                 <>
