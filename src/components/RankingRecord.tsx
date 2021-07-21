@@ -6,11 +6,11 @@ import { User } from 'interfaces/index'
 import { getUser } from 'lib/api/user'
 
 
-import { Typography } from '@material-ui/core';
-
+import {IconButton, Button, Typography } from '@material-ui/core';
 import PersonIcon from "@material-ui/icons/Person"
-
-
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import { Link, Redirect } from 'react-router-dom';
+import { Routes } from 'Routes';
 
 
 
@@ -21,7 +21,7 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
     const handleSetUser = async () => {
         try {
 
-            const res = await getUser(ranking.id);
+            const res = await getUser(ranking.userId);
 
             if (res?.status === 200) {
                 setUser(res.data.user)
@@ -40,7 +40,7 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
     }, [])
 
     const rankingDate = new Date(ranking.createdAt)
-
+    
     return(
         <>
             <div className="max-w-md w-full lg:max-w-full m-auto mb-3 ">
@@ -53,7 +53,11 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
                     <div className=" flex grid grid-cols-3 gap-4">
 
                         <div className="bg-white rounded-full h-16 w-16 flex justify-center items-center col-auto" >
-                            <PersonIcon fontSize="large"/>
+                            <IconButton>
+                                <Link to={Routes.userProfile.pathWith(ranking.userId)}>
+                                    <PersonIcon fontSize="large"/>
+                                </Link>
+                            </IconButton>
                         </div>
 
                         <div className="col-auto flex justify-center items-center">
@@ -71,3 +75,62 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
         </>
     )
 }
+
+
+export const RankingTopRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
+
+    const [user, setUser] = useState<User>()
+
+    const handleSetUser = async () => {
+        try {
+            console.log(ranking.userId)
+            console.log(ranking)
+            const res = await getUser(ranking.userId)
+
+            if (res?.status === 200) {
+                setUser(res.data.user)
+            } else {
+                console.log("取得に失敗しました")
+            }
+
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        handleSetUser()
+    }, [])
+
+    const rankingDate = new Date(ranking.createdAt)
+    
+    return(
+        <>
+           
+            <div className="bg-red rounded-full h-80 w-80 flex justify-center items-start m-auto p-4 shadow-2xl" >
+                <div>
+                    <div className="flex justify-center items-center ">
+                        <EmojiEventsIcon  fontSize="large" htmlColor="#F7FD04" />
+                    </div>
+                    <div className="bg-white hover:bg-pink rounded-full h-20 w-20 flex justify-center items-center" >
+                        <IconButton>
+                            <Link to={Routes.userProfile.pathWith(ranking.userId)}>
+                                <PersonIcon fontSize="large"/>
+                            </Link>
+                        </IconButton>
+                    </div>
+                    <div>
+                        <div>
+                            <p className="text-center text-2xl">{user?.name}</p>
+                        </div>
+
+                        <p className="text-center text-2xl text-green ">{rankingDate.getHours() + ':' + rankingDate.getMinutes()}</p>
+                    </div>
+                </div>
+            </div>
+
+        </>
+    )
+}
+

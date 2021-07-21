@@ -3,16 +3,15 @@ import { useState, useEffect } from "react";
 
 import { getRankings } from "lib/api/ranking";
 import { DailyRanking } from "interfaces/ranking";
-
-import { RankingRecord } from "components/RankingRecord";
-
-import PersonIcon from "@material-ui/icons/Person"
-import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import { Link } from 'react-router-dom'
+import { RankingRecord , RankingTopRecord } from "components/RankingRecord";
+import { Button } from '@material-ui/core'
+import { Routes } from "Routes";
 
 export const Ranking: VFC = ()=>{
 
     const [ rankings, setRankings ] = useState<DailyRanking[]>([])
-
+    
     const handleRankings = async () => {
 
         try{
@@ -30,34 +29,39 @@ export const Ranking: VFC = ()=>{
     useEffect(()=>{
         handleRankings()
     },[])
+    
+    
+    // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
+    // TODO: component:childernをうまく使えばいける？
 
-
+    // TODO: エントリーボタンへの条件分岐しなければいけない もしかしたら別のページでルーティングでするかも
     return (
         <>
-
-        <div className="bg-red rounded-full h-64 w-64 flex justify-center items-start m-auto p-4 " >
             <div>
-                <div className="flex justify-center items-center">
-                    <EmojiEventsIcon  fontSize="large" htmlColor="#F7FD04" />
-                </div>
-                <div className="bg-white rounded-full h-20 w-20 flex justify-center items-center" >
-                    <PersonIcon fontSize="large"/>
-                </div>
-                <p className="text-center">{"Leandro"}</p>
-                <p className="text-center text-green ">{"7:30"}</p>
+                {
+                    rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
+                        <RankingTopRecord {...ranking}/>
+                    ))
+                }
             </div>
-
-        </div>
-
-        <div className="">
-            {
-                rankings.map(r => (
-                    <RankingRecord {...r}/>
-                ))
-            }
-        </div>
+            <div className="-mt-10">
+                {
+                    rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
+                        <RankingRecord {...ranking}/>
+                    ))
+                }
+            </div>
         </>
     )
+    // return (
+    //     <div className="mt-60">
+    //         <Button variant="outlined" color="secondary">
+    //             <Link to={Routes.calcTest.path}>
+    //                 目覚める
+    //             </Link>
+    //         </Button>
+    //     </div>
+    // )
 }
 
 

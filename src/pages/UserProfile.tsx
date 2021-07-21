@@ -43,6 +43,8 @@ export const UserPrifile:VFC = () =>{
         handleSetUser()
     },[])
 
+    // TODO: グラフ or 一覧を作らないといけない
+    
     return(
         <>
         {
