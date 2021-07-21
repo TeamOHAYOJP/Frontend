@@ -96,8 +96,7 @@ const SignIn: React.FC = () => {
         }
 
     }
-    // TODO: SignIn & SignUP
-    // TODO: 色の微調整をしたい
+    // TODO: SignIn & SignUP 色の微調整をしたい
     return (
         <>
             <form noValidate autoComplete="off">

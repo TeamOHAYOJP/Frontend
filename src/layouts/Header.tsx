@@ -43,7 +43,7 @@ function ElevationScroll(props: { children: React.ReactElement }) {
 
 export const HeaderDefault: FC = () => {
 
-    const { isSignedIn, currentUser , setIsSignedIn , setIsRankedIn} = useContext(AuthContext)
+    const { isSignedIn, currentUser , setIsSignedIn , isRankedIn, setIsRankedIn} = useContext(AuthContext)
     // const doesUserWokeUp:Boolean = ...
     const histroy = useHistory()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -98,11 +98,8 @@ export const HeaderDefault: FC = () => {
                         <div>
                             {
                                 // TODO: twitterのやつやんないと
-                                // 1. backでrankig関連全部作る
-                                // 2. backでuserが含まれてるかをjsonで /rankigs_controller#isUserInclueded & もしくは面倒だったらフロント側でやってもいい
-                                // 3. フロントで条件分岐↓コメントイン
                                 // 4. あの記事通りにやってみる.
-                                isSignedIn && currentUser  /*&&  doesUserWokeUp */ ? (
+                                isSignedIn && currentUser  && isRankedIn ? (
                                     <>
                                         <Button aria-controls="" aria-haspopup="true">
                                             <TwitterIcon className="text-white" />
