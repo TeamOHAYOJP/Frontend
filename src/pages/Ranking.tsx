@@ -49,7 +49,7 @@ export const Ranking: VFC = ()=>{
 
             if (res.status === 200) {
                 setIsRankedIn(true)
-                histroy.push(Routes.welcome.path)
+                histroy.push(Routes.root.path)
                 console.log("Create DailyRanking and Ranking successfully")
 
             } else {
@@ -66,46 +66,52 @@ export const Ranking: VFC = ()=>{
         }
     }
 
-    console.log(isRankedIn)
+    console.log(`currentUser ranked in is : ${isRankedIn}`)
     // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
     // TODO: component:childernをうまく使えばいける？
 
-    // TODO: エントリーボタンを作らないといけない
-    // return (
-    //     <>
-    //         <div>
-    //             {
-    //                 rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
-    //                     <RankingTopRecord {...ranking}/>
-    //                 ))
-    //             }
-    //         </div>
-    //         <div className="-mt-10">
-    //             {
-    //                 rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
-    //                     <RankingRecord {...ranking}/>
-    //                 ))
-    //             }
-    //         </div>
-    //     </>
-    // )
 
     return (
-        <div className="mt-60">
-            <Button 
-                variant="outlined" 
-                color="secondary"
-                onClick={handleSubmit}
-            >
-                    目覚める
-            </Button>
-            <AlertMessage // エラーが発生した場合はアラートを表示
-                open={alertMessageOpen}
-                setOpen={setAlertMessageOpen}
-                severity="error"
-                message="目覚めるのに失敗しました"
-            />
-        </div>
+        <>
+        {
+            isRankedIn ? (
+                <>
+                <div>
+                    {
+                        rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
+                            <RankingTopRecord {...ranking}/>
+                        ))
+                    }
+                </div>
+                <div className="-mt-10">
+                    {
+                        rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
+                            <RankingRecord {...ranking}/>
+                        ))
+                    }
+                </div>
+            </>
+            ) : (
+                <div className="mt-60">
+                <Button 
+                    variant="outlined" 
+                    color="secondary"
+                    onClick={handleSubmit}
+                >
+                        目覚める
+                </Button>
+                <AlertMessage // エラーが発生した場合はアラートを表示
+                    open={alertMessageOpen}
+                    setOpen={setAlertMessageOpen}
+                    severity="error"
+                    message="目覚めるのに失敗しました"
+                />
+            </div>
+            )
+        }
+        </>
+        
+        
     )
 }
 
