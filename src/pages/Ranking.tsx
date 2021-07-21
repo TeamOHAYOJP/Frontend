@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 
 import { getRankings } from "lib/api/ranking";
 import { DailyRanking } from "interfaces/ranking";
-
+import { Link } from 'react-router-dom'
 import { RankingRecord , RankingTopRecord } from "components/RankingRecord";
-
+import { Button } from '@material-ui/core'
+import { Routes } from "Routes";
 
 export const Ranking: VFC = ()=>{
 
@@ -34,23 +35,32 @@ export const Ranking: VFC = ()=>{
     // TODO: component:childernをうまく使えばいける？
 
     // TODO: エントリーボタンを作らないといけない
+    // return (
+    //     <>
+    //         <div>
+    //             {
+    //                 rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
+    //                     <RankingTopRecord {...ranking}/>
+    //                 ))
+    //             }
+    //         </div>
+    //         <div className="-mt-10">
+    //             {
+    //                 rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
+    //                     <RankingRecord {...ranking}/>
+    //                 ))
+    //             }
+    //         </div>
+    //     </>
+    // )
     return (
-        <>
-            <div>
-                {
-                    rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
-                        <RankingTopRecord {...ranking}/>
-                    ))
-                }
-            </div>
-            <div className="-mt-10">
-                {
-                    rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
-                        <RankingRecord {...ranking}/>
-                    ))
-                }
-            </div>
-        </>
+        <div className="mt-60">
+            <Button variant="outlined" color="secondary">
+                <Link to={Routes.calcTest.path}>
+                    目覚める
+                </Link>
+            </Button>
+        </div>
     )
 }
 
