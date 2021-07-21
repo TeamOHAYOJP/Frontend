@@ -34,34 +34,34 @@ export const Ranking: VFC = ()=>{
     // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
     // TODO: component:childernをうまく使えばいける？
 
-    // TODO: エントリーボタンを作らないといけない
-    // return (
-    //     <>
-    //         <div>
-    //             {
-    //                 rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
-    //                     <RankingTopRecord {...ranking}/>
-    //                 ))
-    //             }
-    //         </div>
-    //         <div className="-mt-10">
-    //             {
-    //                 rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
-    //                     <RankingRecord {...ranking}/>
-    //                 ))
-    //             }
-    //         </div>
-    //     </>
-    // )
+    // TODO: エントリーボタンへの条件分岐しなければいけない もしかしたら別のページでルーティングでするかも
     return (
-        <div className="mt-60">
-            <Button variant="outlined" color="secondary">
-                <Link to={Routes.calcTest.path}>
-                    目覚める
-                </Link>
-            </Button>
-        </div>
+        <>
+            <div>
+                {
+                    rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
+                        <RankingTopRecord {...ranking}/>
+                    ))
+                }
+            </div>
+            <div className="-mt-10">
+                {
+                    rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
+                        <RankingRecord {...ranking}/>
+                    ))
+                }
+            </div>
+        </>
     )
+    // return (
+    //     <div className="mt-60">
+    //         <Button variant="outlined" color="secondary">
+    //             <Link to={Routes.calcTest.path}>
+    //                 目覚める
+    //             </Link>
+    //         </Button>
+    //     </div>
+    // )
 }
 
 
