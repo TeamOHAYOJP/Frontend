@@ -1,17 +1,15 @@
 import React, { useState, useEffect, createContext } from "react"
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 // import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-    
+
 import AppLayout from "layouts/AppLayout"
-// import Home from "pages/Home"
-import SignUp from "pages/SignUp"
-import SignIn from "pages/SignIn"
-import { Ranking } from "pages/Ranking"
-import { Welcome } from "pages/Welcome"
+
+
 import { getCurrentUser } from "lib/api/auth"
 import { User } from "interfaces/index"
-import { UserPrifile } from "pages/UserProfile"
 
+import { Routes } from 'Routes'
+import Cookies from "js-cookie"
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext({} as {
@@ -28,7 +26,6 @@ export const AuthContext = createContext({} as {
 })
 
 const App: React.FC = () => {
-
 
     const [loading, setLoading]         = useState<boolean>(true)
     const [isSignedIn, setIsSignedIn]   = useState<boolean>(false)
@@ -72,27 +69,30 @@ const App: React.FC = () => {
             if (isSignedIn) {
                 return children
             } else {
-                return <Redirect to="/welcome" />
+                return <Redirect to={Routes.welcome.path} />
             }
         } else {
             return <></>
         }
     }
 
+    // TODO: routesブランチでフロー通りに
+    // TODO: back whenever
+    // TODO: back日本時間
     return (
         <Router>
             <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
                 <AppLayout>
                     <Switch>
-                        <Route exact path="/" component={Ranking} />
-                        <Route exact path="/welcome" component={Welcome} />
-                        <Route exact path="/signup" component={SignUp} />
-                        <Route exact path="/signin" component={SignIn} />
-                        <Route exact path="/users/:id" component={UserPrifile} />
-                        
+                        <Route {...Routes.root} />
+                        <Route {...Routes.welcome} />
+                        <Route {...Routes.signUp}/>
+                        <Route {...Routes.signIn} />
+                        <Route {...Routes.userProfile} />
+                        <Route {...Routes.userEdit} />
+
                         <Private>
                             <Switch>
-                            <Route exact path="/users" component={Welcome} />
                             </Switch>
                         </Private>
                     </Switch>

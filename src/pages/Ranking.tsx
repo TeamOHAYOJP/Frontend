@@ -31,7 +31,9 @@ export const Ranking: VFC = ()=>{
         handleRankings()
     },[])
 
-
+    // TODO: 一位だけ切り取って2番目からレコード表示にしないと
+    // TODO: スタイリングを少し
+    
     return (
         <>
 
