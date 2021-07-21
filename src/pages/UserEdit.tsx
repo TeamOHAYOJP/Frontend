@@ -59,7 +59,6 @@ export const UserEdit: VFC = () => {
     // TODO: できればvalidationでalertを表示させたい
     // 1. backendでvalidationかく
     // 2. frontでエラーメッセージ表示させる SignUpと同じでいい
-    // TODO: EditマークはcurrentUserの時しか出ない
     return (
         <>
             {

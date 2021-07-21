@@ -18,6 +18,7 @@ export const UserPrifile:VFC = () =>{
     const { id }:any = useParams()
     const [ user, setUser ] = useState<User>()
     const { currentUser } = useContext(AuthContext)
+    let isMyPage = id == "mypage" || parseInt(id) === currentUser?.id
 
     const handleSetUser = async () =>{
         try{
@@ -44,7 +45,7 @@ export const UserPrifile:VFC = () =>{
     },[])
 
     // TODO: グラフ or 一覧を作らないといけない
-    
+
     return(
         <>
         {
@@ -58,11 +59,17 @@ export const UserPrifile:VFC = () =>{
                     <div className="my-4">
                         <p className="text-center font-mono">{user.name}</p>
                     </div>
-                    <Button variant="outlined">
-                        <Link to={Routes.userEdit.path}>
-                            Edit<EditIcon/>
-                        </Link>
-                    </Button>
+
+                    { 
+                        isMyPage ? (
+                            <Button variant="outlined">
+                                <Link to={Routes.userEdit.path}>
+                                    Edit<EditIcon/>
+                                </Link>
+                            </Button>
+                        ):(<></>)
+
+                    }
                 </>
             ):(
                 <>

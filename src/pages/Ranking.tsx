@@ -48,6 +48,7 @@ export const Ranking: VFC = ()=>{
                 {
                     rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
                         <RankingRecord {...ranking}/>
+
                     ))
                 }
             </div>
