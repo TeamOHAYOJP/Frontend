@@ -32,6 +32,8 @@ export const Ranking: VFC = ()=>{
     
     // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
     // TODO: component:childernをうまく使えばいける？
+
+    // TODO: エントリーボタンを作らないといけない
     return (
         <>
             <div>
