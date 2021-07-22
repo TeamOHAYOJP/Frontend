@@ -48,10 +48,11 @@ export const HeaderDefault: FC = () => {
         isSignedIn, setIsSignedIn , 
         currentUser , 
         isRankedIn, setIsRankedIn,
-        setDailyRank
+        dailyRank, setDailyRank
 
     } = useContext(AuthContext)
-    // const doesUserWokeUp:Boolean = ...
+
+
     const histroy = useHistory()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -76,7 +77,7 @@ export const HeaderDefault: FC = () => {
                 setIsSignedIn(false)
                 setIsRankedIn(false)
                 setDailyRank(undefined)
-                
+
                 histroy.push(Routes.welcome.path)
 
                 console.log("Succeeded in sign out")
@@ -90,9 +91,17 @@ export const HeaderDefault: FC = () => {
         handleClose()
     }
     
+    // TODO: twitterデプロイ前の修正！urlドメインを追加しておきましょう！
     const twitterShareLink = () => {
 
-        return "https://twitter.com/intent/tweet?text=Hello%20Worldあ!!"
+        if(dailyRank){
+            const rankingDate = new Date(dailyRank?.createdAt)
+    
+            return `https://twitter.com/intent/tweet?text=OHAYO！！%0a今日は${rankingDate.getHours()}時${rankingDate.getMinutes()}分におきました！%0a早起きランキングは${dailyRank?.id}位でした！！`
+        }else{
+            return `https://twitter.com/intent/tweet?text=OHAYO！！%0aあれ？。。。あなたはまだランキングにエントリーしていないみたいです。エントリーしてからTwitterでシェアしましょう！！`
+        }
+
     }
 
     return (
@@ -110,8 +119,7 @@ export const HeaderDefault: FC = () => {
                         </Typography>
                         <div>
                             {
-                                // TODO: twitterのやつやんないと
-                                // 4. あの記事通りにやってみる.
+                                
                                 isSignedIn && currentUser  && isRankedIn ? (
                                     <>
                                         <Button aria-controls="" aria-haspopup="true" >

@@ -53,7 +53,7 @@ export const Ranking: VFC = ()=>{
                 setDailyRank(res.data.dailyRanking)
 
                 histroy.push(Routes.root.path)
-                
+
                 console.log("Create DailyRanking and Ranking successfully")
 
             } else {
@@ -71,7 +71,8 @@ export const Ranking: VFC = ()=>{
     }
     
 
-    console.log(`currentUser ranked in is : ${isRankedIn} `)
+    console.log(`currentUser isRankedIn is : ${isRankedIn} `)
+    console.log(`currentUser dailyRank  is : ${dailyRank} `)
     // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
     // component:childernをうまく使えばいける？
 
