@@ -12,7 +12,7 @@ import { AuthContext } from "App";
 import AlertMessage from "utils/AlertMessage";
 export const Ranking: VFC = ()=>{
 
-    const { currentUser , isRankedIn, setIsRankedIn} = useContext(AuthContext)
+    const { currentUser , isRankedIn, setIsRankedIn, dailyRank, setDailyRank} = useContext(AuthContext)
     const [ rankings, setRankings] = useState<DailyRanking[]>([])
     const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false)
     const histroy = useHistory()
@@ -48,8 +48,12 @@ export const Ranking: VFC = ()=>{
             console.log(res)
 
             if (res.status === 200) {
+
                 setIsRankedIn(true)
+                setDailyRank(res.data.dailyRanking)
+
                 histroy.push(Routes.root.path)
+
                 console.log("Create DailyRanking and Ranking successfully")
 
             } else {
@@ -65,8 +69,10 @@ export const Ranking: VFC = ()=>{
 
         }
     }
+    
 
-    console.log(`currentUser ranked in is : ${isRankedIn}`)
+    console.log(`currentUser isRankedIn is : ${isRankedIn} `)
+    console.log(`currentUser dailyRank  is : ${dailyRank} `)
     // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
     // component:childernをうまく使えばいける？
 
