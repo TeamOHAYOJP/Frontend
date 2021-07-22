@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react'
-import { useHistory, Link } from "react-router-dom"
+import { useHistory, Link, Redirect } from "react-router-dom"
 import Cookies from "js-cookie"
 
 
@@ -43,8 +43,16 @@ function ElevationScroll(props: { children: React.ReactElement }) {
 
 export const HeaderDefault: FC = () => {
 
-    const { isSignedIn, currentUser , setIsSignedIn} = useContext(AuthContext)
-    // const doesUserWokeUp:Boolean = ...
+    const { 
+
+        isSignedIn, setIsSignedIn , 
+        currentUser , 
+        isRankedIn, setIsRankedIn,
+        dailyRank, setDailyRank
+
+    } = useContext(AuthContext)
+
+
     const histroy = useHistory()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -67,6 +75,9 @@ export const HeaderDefault: FC = () => {
                 Cookies.remove("_uid")
 
                 setIsSignedIn(false)
+                setIsRankedIn(false)
+                setDailyRank(undefined)
+
                 histroy.push(Routes.welcome.path)
 
                 console.log("Succeeded in sign out")
@@ -80,6 +91,18 @@ export const HeaderDefault: FC = () => {
         handleClose()
     }
     
+    // TODO: twitterデプロイ前の修正！urlドメインを追加しておきましょう！
+    const twitterShareLink = () => {
+
+        if(dailyRank){
+            const rankingDate = new Date(dailyRank?.createdAt)
+    
+            return `https://twitter.com/intent/tweet?text=OHAYO！！%0a今日は${rankingDate.getHours()}時${rankingDate.getMinutes()}分におきました！%0a早起きランキングは${dailyRank?.id}位でした！！`
+        }else{
+            return `https://twitter.com/intent/tweet?text=OHAYO！！%0aあれ？。。。あなたはまだランキングにエントリーしていないみたいです。エントリーしてからTwitterでシェアしましょう！！`
+        }
+
+    }
 
     return (
         <div className="">
@@ -96,15 +119,13 @@ export const HeaderDefault: FC = () => {
                         </Typography>
                         <div>
                             {
-                                // TODO: twitterのやつやんないと
-                                // 1. backでrankig関連全部作る
-                                // 2. backでuserが含まれてるかをjsonで /rankigs_controller#isUserInclueded & もしくは面倒だったらフロント側でやってもいい
-                                // 3. フロントで条件分岐↓コメントイン
-                                // 4. あの記事通りにやってみる.
-                                isSignedIn && currentUser  /*&&  doesUserWokeUp */ ? (
+                                
+                                isSignedIn && currentUser  && isRankedIn ? (
                                     <>
-                                        <Button aria-controls="" aria-haspopup="true">
+                                        <Button aria-controls="" aria-haspopup="true" >
+                                            <a href={twitterShareLink()} target="_blank">
                                             <TwitterIcon className="text-white" />
+                                            </a>
                                         </Button>
                                     </>
                                 ) : ("")

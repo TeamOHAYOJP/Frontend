@@ -6,10 +6,12 @@ import AppLayout from "layouts/AppLayout"
 
 
 import { getCurrentUser } from "lib/api/auth"
+import { getIsRankedIn } from "lib/api/ranking"
 import { User } from "interfaces/index"
 
 import { Routes } from 'Routes'
 import Cookies from "js-cookie"
+import { DailyRanking } from "interfaces/ranking"
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext({} as {
@@ -23,6 +25,11 @@ export const AuthContext = createContext({} as {
     currentUser   : User | undefined
     setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>
 
+    isRankedIn      : boolean
+    setIsRankedIn   : React.Dispatch<React.SetStateAction<boolean>>
+
+    dailyRank       : DailyRanking | undefined
+    setDailyRank    : React.Dispatch<React.SetStateAction<DailyRanking | undefined>>
 })
 
 const App: React.FC = () => {
@@ -30,7 +37,8 @@ const App: React.FC = () => {
     const [loading, setLoading]         = useState<boolean>(true)
     const [isSignedIn, setIsSignedIn]   = useState<boolean>(false)
     const [currentUser, setCurrentUser] = useState<User | undefined>()
-
+    const [isRankedIn, setIsRankedIn]   = useState<boolean>(false)
+    const [dailyRank, setDailyRank]     = useState<DailyRanking | undefined>()
     // 認証済みのユーザーがいるかどうかチェック
     // 確認できた場合はそのユーザーの情報を取得
     const handleGetCurrentUser = async () => {
@@ -48,19 +56,44 @@ const App: React.FC = () => {
             }
 
         } catch (err) {
+            console.log("falsed to get currentUser")
+            console.log(err)
 
+        }
+
+
+    }
+    const handleSetIsRankedIn = async () =>{
+
+        try {
+
+            const res = await getIsRankedIn()
+            console.log(res)
+
+            if (res?.status === 200) {
+                setIsRankedIn(res.data.isRankedIn)
+                setDailyRank(res.data.ranking)
+            } else {
+                console.log("No current user")
+            }
+
+        } catch (err) {
+            console.log("failed to set isRankedIn")
             console.log(err)
 
         }
 
         setLoading(false)
-
     }
+
 
     useEffect(() => {
         handleGetCurrentUser()
     }, [setCurrentUser])
 
+    useEffect(() => {
+        handleSetIsRankedIn()
+    },[])
 
     // ユーザーが認証済みかどうかでルーティングを決定
     // 未認証だった場合は「/signin」ページに促す
@@ -76,12 +109,13 @@ const App: React.FC = () => {
         }
     }
 
+
     // TODO: routesブランチでフロー通りに
     // TODO: back whenever
     // TODO: back日本時間
     return (
         <Router>
-            <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
+            <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser, isRankedIn, setIsRankedIn, dailyRank, setDailyRank }}>
                 <AppLayout>
                     <Switch>
                         <Route {...Routes.root} />
