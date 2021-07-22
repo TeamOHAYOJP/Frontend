@@ -43,7 +43,14 @@ function ElevationScroll(props: { children: React.ReactElement }) {
 
 export const HeaderDefault: FC = () => {
 
-    const { isSignedIn, currentUser , setIsSignedIn , isRankedIn, setIsRankedIn} = useContext(AuthContext)
+    const { 
+
+        isSignedIn, setIsSignedIn , 
+        currentUser , 
+        isRankedIn, setIsRankedIn,
+        setDailyRank
+
+    } = useContext(AuthContext)
     // const doesUserWokeUp:Boolean = ...
     const histroy = useHistory()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -68,6 +75,8 @@ export const HeaderDefault: FC = () => {
 
                 setIsSignedIn(false)
                 setIsRankedIn(false)
+                setDailyRank(undefined)
+                
                 histroy.push(Routes.welcome.path)
 
                 console.log("Succeeded in sign out")
