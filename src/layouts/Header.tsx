@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react'
-import { useHistory, Link } from "react-router-dom"
+import { useHistory, Link, Redirect } from "react-router-dom"
 import Cookies from "js-cookie"
 
 
@@ -81,6 +81,10 @@ export const HeaderDefault: FC = () => {
         handleClose()
     }
     
+    const twitterShareLink = () => {
+
+        return "https://twitter.com/intent/tweet?text=Hello%20Worldあ!!"
+    }
 
     return (
         <div className="">
@@ -101,8 +105,10 @@ export const HeaderDefault: FC = () => {
                                 // 4. あの記事通りにやってみる.
                                 isSignedIn && currentUser  && isRankedIn ? (
                                     <>
-                                        <Button aria-controls="" aria-haspopup="true">
+                                        <Button aria-controls="" aria-haspopup="true" >
+                                            <a href={twitterShareLink()} target="_blank">
                                             <TwitterIcon className="text-white" />
+                                            </a>
                                         </Button>
                                     </>
                                 ) : ("")

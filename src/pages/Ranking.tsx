@@ -65,8 +65,9 @@ export const Ranking: VFC = ()=>{
 
         }
     }
+    
 
-    console.log(`currentUser ranked in is : ${isRankedIn}`)
+    console.log(`currentUser ranked in is : ${isRankedIn} `)
     // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
     // component:childernをうまく使えばいける？
 

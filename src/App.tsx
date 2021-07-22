@@ -52,29 +52,28 @@ const App: React.FC = () => {
             }
 
         } catch (err) {
-
+            console.log("falsed to get currentUser")
             console.log(err)
 
         }
 
-        setLoading(false)
 
     }
     const handleSetIsRankedIn = async () =>{
-        setLoading(true)
+
         try {
 
             const res = await getIsRankedIn()
             console.log(res)
 
             if (res?.status === 200) {
-                setIsSignedIn(res.data.isRankedIn)
+                setIsRankedIn(res.data.isRankedIn)
             } else {
                 console.log("No current user")
             }
 
         } catch (err) {
-
+            console.log("failed to set isRankedIn")
             console.log(err)
 
         }
