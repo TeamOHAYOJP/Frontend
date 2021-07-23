@@ -1,24 +1,63 @@
 import React, { VFC } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-import { getRankings } from "lib/api/ranking";
+import { getRankings, postRanking } from "lib/api/ranking";
 import { DailyRanking } from "interfaces/ranking";
+import { Link, useHistory } from 'react-router-dom'
+import { RankingRecord , RankingTopRecord } from "components/RankingRecord";
+import { Button } from '@material-ui/core'
+import { Routes } from "Routes";
 
-import { RankingRecord } from "components/RankingRecord";
-
-import PersonIcon from "@material-ui/icons/Person"
-import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
-
+import { AuthContext } from "App";
+import AlertMessage from "utils/AlertMessage";
 export const Ranking: VFC = ()=>{
 
-    const [ rankings, setRankings ] = useState<DailyRanking[]>([])
+    const { currentUser , isRankedIn, setIsRankedIn, dailyRank, setDailyRank} = useContext(AuthContext)
+    const [ rankings, setRankings] = useState<DailyRanking[]>([])
+    const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false)
+    const histroy = useHistory()
 
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+
+        e.preventDefault()
+        const data = {
+            userId: currentUser?.id
+        }
+
+        try {
+
+            const res = await postRanking(data)
+            console.log(res)
+
+            if (res.status === 200) {
+
+                setIsRankedIn(true)
+                setDailyRank(res.data.dailyRanking)
+
+                histroy.push(Routes.root.path)
+
+                console.log("Create DailyRanking and Ranking successfully")
+
+            } else {
+
+                setAlertMessageOpen(true)
+
+            }
+
+        } catch (err) {
+
+            console.log(err)
+            setAlertMessageOpen(true)
+
+        }
+    }
     const handleRankings = async () => {
 
         try{
             const res = await getRankings()
             if(res.status === 200){
                 setRankings(res.data.dailyRankings)
+                histroy.push(Routes.root.path)
             }else{
                 console.log("取得に失敗しました")
             }
@@ -30,33 +69,59 @@ export const Ranking: VFC = ()=>{
     useEffect(()=>{
         handleRankings()
     },[])
+    
+    
+    
+
+    console.log(`currentUser isRankedIn is : ${isRankedIn} `)
+    console.log(`currentUser dailyRank  is : ${dailyRank} `)
+    // TODO: 無理矢理だがひとまずこれで、他の方法があればそれに変更したい。
+    // component:childernをうまく使えばいける？
 
 
     return (
         <>
-
-        <div className="bg-red rounded-full h-64 w-64 flex justify-center items-start m-auto p-4 " >
-            <div>
-                <div className="flex justify-center items-center">
-                    <EmojiEventsIcon  fontSize="large" htmlColor="#F7FD04" />
+        {
+            isRankedIn ? (
+                <>
+                {}
+                <div>
+                    {
+                        rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
+                            <RankingTopRecord {...ranking}/>
+                        ))
+                    }
                 </div>
-                <div className="bg-white rounded-full h-20 w-20 flex justify-center items-center" >
-                    <PersonIcon fontSize="large"/>
+                <div className="-mt-10">
+                    {
+                        rankings.map((ranking, idx)=> idx === 0 ? (<></>):(
+                            <RankingRecord {...ranking}/>
+                        ))
+                    }
                 </div>
-                <p className="text-center">{"Leandro"}</p>
-                <p className="text-center text-green ">{"7:30"}</p>
+            </>
+            ) : (
+                <div className="mt-60">
+                <Button 
+                    variant="outlined" 
+                    color="secondary"
+                    onClick={handleSubmit}
+                >
+                        目覚める
+                </Button>
+                <AlertMessage // エラーが発生した場合はアラートを表示
+                    open={alertMessageOpen}
+                    setOpen={setAlertMessageOpen}
+                    severity="error"
+                    message="目覚めるのに失敗しました"
+                />
             </div>
-
-        </div>
-
-        <div className="">
-            {
-                rankings.map(r => (
-                    <RankingRecord {...r}/>
-                ))
-            }
-        </div>
+            )
+        }
         </>
+        
+        
+
     )
 }
 
