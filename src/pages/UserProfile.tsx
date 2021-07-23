@@ -2,7 +2,7 @@ import React, { useContext, VFC } from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 
-import { RankingGraph} from "components/RankingGraph";
+import { RankingGraph, RankingsIndex} from "components/RankingGraph";
 
 import { User } from 'interfaces/index'
 import { getUser } from "lib/api/user";
@@ -33,8 +33,10 @@ export const UserPrifile:VFC = () =>{
             const res = await getUser(id) ;
             console.log(res)
             if(res?.status === 200){
+
                 setUser(res.data.user)
                 setRankings(res.data.rankings)
+                
             }else{
                 console.log("取得に失敗しました")
             }
@@ -80,9 +82,14 @@ export const UserPrifile:VFC = () =>{
                     }
                     {
                         rankings !== undefined ? (
-                            <div className="mt-8">
-                                <RankingGraph rankings={rankings}/>
-                            </div>
+                            <>
+                                <div className="mt-8">
+                                    <RankingGraph rankings={rankings}/>
+                                </div>
+                                <div className="mt-8">
+                                    <RankingsIndex rankings={rankings}/>
+                                </div>
+                            </>
                         ):(
                             <h1 className="mt-8">ランキングデータの取得に失敗しました</h1>
                         )

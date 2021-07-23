@@ -16,25 +16,7 @@ export const Ranking: VFC = ()=>{
     const [ rankings, setRankings] = useState<DailyRanking[]>([])
     const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false)
     const histroy = useHistory()
-    
-    const handleRankings = async () => {
 
-        try{
-            const res = await getRankings()
-            if(res.status === 200){
-                setRankings(res.data.dailyRankings)
-            }else{
-                console.log("取得に失敗しました")
-            }
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-    useEffect(()=>{
-        handleRankings()
-    },[])
-    
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
         e.preventDefault()
@@ -69,6 +51,26 @@ export const Ranking: VFC = ()=>{
 
         }
     }
+    const handleRankings = async () => {
+
+        try{
+            const res = await getRankings()
+            if(res.status === 200){
+                setRankings(res.data.dailyRankings)
+                histroy.push(Routes.root.path)
+            }else{
+                console.log("取得に失敗しました")
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    useEffect(()=>{
+        handleRankings()
+    },[])
+    
+    
     
 
     console.log(`currentUser isRankedIn is : ${isRankedIn} `)
@@ -82,6 +84,7 @@ export const Ranking: VFC = ()=>{
         {
             isRankedIn ? (
                 <>
+                {}
                 <div>
                     {
                         rankings.map((ranking, idx)=> idx !== 0 ? (<></>):(
