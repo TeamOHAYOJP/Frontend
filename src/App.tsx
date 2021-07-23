@@ -87,13 +87,15 @@ const App: React.FC = () => {
     }
 
 
+
     useEffect(() => {
         handleGetCurrentUser()
     }, [setCurrentUser])
-
+    
     useEffect(() => {
         handleSetIsRankedIn()
     },[])
+
 
     // ユーザーが認証済みかどうかでルーティングを決定
     // 未認証だった場合は「/signin」ページに促す
@@ -111,8 +113,6 @@ const App: React.FC = () => {
 
 
     // TODO: routesブランチでフロー通りに
-    // TODO: back whenever
-    // TODO: back日本時間
     return (
         <Router>
             <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser, isRankedIn, setIsRankedIn, dailyRank, setDailyRank }}>
