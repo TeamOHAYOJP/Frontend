@@ -25,7 +25,7 @@ const getGraghData = (rankings: Ranking[]) => {
         return {
             
             x: date.getDate(),
-            y: date.getDate(),
+            y: date.getMinutes(),
 
             // x: moment(`${year}-01-01`), 
             // y: moment(`1970-02-01 ${times[index]}`).valueOf()
@@ -43,7 +43,7 @@ const getLabelData = (rankings: Ranking[]) => {
     while (i >= 0 && j >= 0) {
         weeklyRankings[j--] = rankings[i--]
     }
-    let dateCache = null
+
     const data = weeklyRankings.map(r => new Date(r.createdAt).getDate());
     return data
 }
