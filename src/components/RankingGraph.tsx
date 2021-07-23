@@ -47,7 +47,7 @@ const getLabelData = (rankings: Ranking[]) => {
     const data = weeklyRankings.map(r => new Date(r.createdAt).getDate());
     return data
 }
-
+// TODO: グラフ最低限の状態
 export const RankingGraph: VFC<PROPS> = (props: PROPS) => {
 
 

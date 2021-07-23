@@ -111,22 +111,19 @@ const App: React.FC = () => {
         }
     }
 
-
-    // TODO: routesブランチでフロー通りに
     return (
         <Router>
             <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser, isRankedIn, setIsRankedIn, dailyRank, setDailyRank }}>
                 <AppLayout>
                     <Switch>
-                        <Route {...Routes.root} />
-                        <Route {...Routes.welcome} />
-                        <Route {...Routes.signUp}/>
-                        <Route {...Routes.signIn} />
-                        <Route {...Routes.userProfile} />
-                        <Route {...Routes.userEdit} />
-
+                                <Route {...Routes.welcome} />
+                                <Route {...Routes.signUp}/>
+                                <Route {...Routes.signIn} />
                         <Private>
                             <Switch>
+                                <Route {...Routes.root} />
+                                <Route {...Routes.userProfile} />
+                                <Route {...Routes.userEdit} />
                             </Switch>
                         </Private>
                     </Switch>
