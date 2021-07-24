@@ -96,8 +96,8 @@ export const HeaderDefault: FC = () => {
 
         if(dailyRank){
             const rankingDate = new Date(dailyRank?.createdAt)
-    
-            return `https://twitter.com/intent/tweet?text=OHAYO！！%0a今日は${rankingDate.getHours()}時${rankingDate.getMinutes()}分におきました！%0a早起きランキングは${dailyRank?.id}位でした！！`
+            const siteURL = 'http://oahyojp.ml'
+            return `https://twitter.com/intent/tweet?text=OHAYO！！%0a今日は${rankingDate.getHours()}時${rankingDate.getMinutes()}分におきました！%0a早起きランキングは${dailyRank?.id}位でした！！%0a&url=${siteURL}`
         }else{
             return `https://twitter.com/intent/tweet?text=OHAYO！！%0aあれ？。。。あなたはまだランキングにエントリーしていないみたいです。エントリーしてからTwitterでシェアしましょう！！`
         }
