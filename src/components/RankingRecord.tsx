@@ -113,7 +113,7 @@ export const RankingTopRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
                     <div className="flex justify-center items-center ">
                         <EmojiEventsIcon  fontSize="large" htmlColor="#F7FD04" />
                     </div>
-                    <div className="bg-white hover:bg-pink rounded-full h-20 w-20 flex justify-center items-center" >
+                    <div className="bg-white hover:bg-pink rounded-full h-20 w-20 flex justify-center items-center m-auto" >
                         <IconButton>
                             <Link to={Routes.userProfile.pathWith(ranking.userId)}>
                                 <PersonIcon fontSize="large"/>
