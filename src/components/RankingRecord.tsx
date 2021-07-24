@@ -13,7 +13,19 @@ import { Link, Redirect } from 'react-router-dom';
 import { Routes } from 'Routes';
 
 
+const getDateString = (date:Date) => {
 
+    const hours = date.getHours().toString()
+    const minutes = date.getMinutes().toString()
+    
+    let dateString = "";
+    dateString += hours.length   != 2 ? "0" + hours   : hours;
+    dateString += ":"
+    dateString += minutes.length != 2 ? "0" + minutes : minutes;
+
+    return dateString
+
+}
 export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
 
     const [user, setUser] = useState<User>()
@@ -39,8 +51,12 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
         handleSetUser()
     }, [])
 
-    const rankingDate = new Date(ranking.createdAt)
     
+
+    
+
+
+
     return(
         <>
             <div className="max-w-md w-full lg:max-w-full m-auto mb-3 ">
@@ -65,7 +81,7 @@ export const RankingRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
                         </div>
 
                         <div className="col-auto flex justify-center items-center text-green text-shadow font-bold">
-                            {rankingDate.getHours() + ':' + rankingDate.getMinutes()}
+                            {getDateString(new Date(ranking.createdAt))}
                         </div>
 
                     </div>
@@ -102,8 +118,6 @@ export const RankingTopRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
     useEffect(() => {
         handleSetUser()
     }, [])
-
-    const rankingDate = new Date(ranking.createdAt)
     
     return(
         <>
@@ -113,7 +127,7 @@ export const RankingTopRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
                     <div className="flex justify-center items-center ">
                         <EmojiEventsIcon  fontSize="large" htmlColor="#F7FD04" />
                     </div>
-                    <div className="bg-white hover:bg-pink rounded-full h-20 w-20 flex justify-center items-center" >
+                    <div className="bg-white hover:bg-pink rounded-full h-20 w-20 flex justify-center items-center m-auto" >
                         <IconButton>
                             <Link to={Routes.userProfile.pathWith(ranking.userId)}>
                                 <PersonIcon fontSize="large"/>
@@ -125,7 +139,7 @@ export const RankingTopRecord: VFC<DailyRanking> = (ranking: DailyRanking) => {
                             <p className="text-center text-2xl">{user?.name}</p>
                         </div>
 
-                        <p className="text-center text-2xl text-green ">{rankingDate.getHours() + ':' + rankingDate.getMinutes()}</p>
+                        <p className="text-center text-2xl text-green ">{getDateString(new Date(ranking.createdAt))}</p>
                     </div>
                 </div>
             </div>
