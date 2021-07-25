@@ -4,8 +4,8 @@ OHAYOJPは朝何時に起きたのかをランキング形式でみんなとシ�
 
 http://ohayojp.ml
 
-# Bakend repository
-https://github.com/TeamRecursion/Hayaoki-Ranking-Backend
+# Frontend repository
+https://github.com/TeamRecursion/Hayaoki-Ranking-Frontend
 
 # DEMO
 
