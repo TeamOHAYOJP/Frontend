@@ -5,7 +5,7 @@ OHAYOJPは朝何時に起きたのかをランキング形式でみんなとシ�
 http://ohayojp.ml
 
 # Frontend repository
-https://github.com/TeamRecursion/Hayaoki-Ranking-Frontend
+https://github.com/TeamOHAYOJP/Backend
 
 # DEMO
 
